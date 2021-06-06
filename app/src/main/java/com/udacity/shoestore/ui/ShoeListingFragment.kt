@@ -1,20 +1,22 @@
 package com.udacity.shoestore.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListingBinding
 import com.udacity.shoestore.databinding.ShoeListItemBinding
 import com.udacity.shoestore.models.Shoe
+import com.udacity.shoestore.utils.LOGGED_OUT
+import com.udacity.shoestore.utils.setPrefBoolean
 
 
 class ShoeListingFragment : Fragment() {
@@ -48,8 +50,20 @@ class ShoeListingFragment : Fragment() {
         sharedViewModel.shoeList.observe(viewLifecycleOwner, Observer {
             updateUI(inflater, it)
         })
+        setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        setPrefBoolean(this.requireContext(), LOGGED_OUT, true)
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
     private fun updateUI(inflater: LayoutInflater, shoeList: List<Shoe>) {

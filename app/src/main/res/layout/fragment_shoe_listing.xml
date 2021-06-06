@@ -1,6 +1,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--Coordinator layout is powered FrameLayout which facilitates how views should
+    interact with each other in a layout. It can position the floating action button appropriately-->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

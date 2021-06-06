@@ -10,6 +10,9 @@
             type="com.udacity.shoestore.ui.MainViewModel" />
     </data>
 
+    <!-- Choosing Constraint layout is a right choice here to avoid creating another
+    linear layout to position the buttons horizontally-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
